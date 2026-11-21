@@ -1,0 +1,92 @@
+{
+  "Show a setting from the theme editor": {
+    "prefix": "setting",
+    "description": "Print a section setting (the value a store owner types in the theme editor)",
+    "body": "{{ section.settings.${1:heading} }}"
+  },
+  "Product title": {
+    "prefix": "product-title",
+    "description": "Print the product's name",
+    "body": "{{ product.title }}"
+  },
+  "Product price": {
+    "prefix": "product-price",
+    "description": "Print a price with the currency symbol",
+    "body": "{{ ${1:product.price} | money }}"
+  },
+  "Link to a product": {
+    "prefix": "product-link",
+    "description": "A clickable product name",
+    "body": "<a href=\"{{ product.url }}\">{{ product.title }}</a>"
+  },
+  "Show an image": {
+    "prefix": "img",
+    "description": "Responsive image that loads lazily",
+    "body": "{{ ${1:product.featured_image} | image_url: width: ${2:600} | image_tag: loading: 'lazy', alt: ${3:product.title} }}"
+  },
+  "Loop over products": {
+    "prefix": "for-products",
+    "description": "Repeat some HTML for every product in a collection",
+    "body": [
+      "{% for product in ${1:collection.products} %}",
+      "  <div class=\"product-card\">",
+      "    <a href=\"{{ product.url }}\">{{ product.title }}</a>",
+      "    <p>{{ product.price | money }}</p>",
+      "  </div>",
+      "{% endfor %}"
+    ]
+  },
+  "If / else": {
+    "prefix": "if",
+    "description": "Show something only when a condition is true",
+    "body": [
+      "{% if ${1:product.available} %}",
+      "  $2",
+      "{% else %}",
+      "  $3",
+      "{% endif %}"
+    ]
+  },
+  "Save a value in a variable": {
+    "prefix": "assign",
+    "description": "Create a variable you can reuse",
+    "body": "{% assign ${1:name} = ${2:value} %}"
+  },
+  "Include a snippet": {
+    "prefix": "render",
+    "description": "Insert a reusable piece from the snippets folder",
+    "body": "{% render '${1:snippet-name}' %}"
+  },
+  "Comment (note to yourself)": {
+    "prefix": "comment",
+    "description": "A note that visitors never see",
+    "body": "{% comment %}${1:your note}{% endcomment %}"
+  },
+  "Button": {
+    "prefix": "button",
+    "description": "A simple link styled as a button",
+    "body": "<a href=\"${1:#}\" class=\"button\">${2:Click me}</a>"
+  },
+  "Section settings block (schema)": {
+    "prefix": "schema",
+    "description": "The settings panel shown in the Shopify theme editor",
+    "body": [
+      "{% schema %}",
+      "{",
+      "  \"name\": \"${1:Section name}\",",
+      "  \"settings\": [",
+      "    {",
+      "      \"type\": \"${2|text,textarea,richtext,image_picker,color,range,checkbox,url|}\",",
+      "      \"id\": \"${3:heading}\",",
+      "      \"label\": \"${4:Heading}\",",
+      "      \"default\": \"${5:Hello}\"",
+      "    }",
+      "  ],",
+      "  \"presets\": [",
+      "    { \"name\": \"${1:Section name}\" }",
+      "  ]",
+      "}",
+      "{% endschema %}"
+    ]
+  }
+}

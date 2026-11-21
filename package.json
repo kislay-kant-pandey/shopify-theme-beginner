@@ -1,0 +1,155 @@
+{
+  "name": "shopify-theme-beginner",
+  "displayName": "Shopify Theme Beginner Helper",
+  "description": "Edit Shopify themes without being a developer: friendly file explorer, 'what do you want to change?' guide, plain-English hover help for Liquid, snippets and one-click preview/upload.",
+  "version": "0.0.1",
+  "publisher": "kislay",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kislay-kant-pandey/shopify-theme-beginner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kislay-kant-pandey/shopify-theme-beginner/issues"
+  },
+  "homepage": "https://github.com/kislay-kant-pandey/shopify-theme-beginner#readme",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "shopify",
+    "liquid",
+    "theme",
+    "beginner"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "workspaceContains:**/layout/theme.liquid",
+    "onLanguage:liquid"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "liquid",
+        "aliases": [
+          "Liquid"
+        ],
+        "extensions": [
+          ".liquid"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "liquid",
+        "path": "./snippets/liquid.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "shopifyBeginner.whatToEdit",
+        "title": "What do you want to change?",
+        "category": "Shopify Beginner",
+        "icon": "$(question)"
+      },
+      {
+        "command": "shopifyBeginner.newSection",
+        "title": "Create a new section",
+        "category": "Shopify Beginner",
+        "icon": "$(add)"
+      },
+      {
+        "command": "shopifyBeginner.addCustomCss",
+        "title": "Set up my own CSS file",
+        "category": "Shopify Beginner"
+      },
+      {
+        "command": "shopifyBeginner.preview",
+        "title": "Start live preview",
+        "category": "Shopify Beginner",
+        "icon": "$(play)"
+      },
+      {
+        "command": "shopifyBeginner.push",
+        "title": "Upload theme to my store",
+        "category": "Shopify Beginner",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "shopifyBeginner.pull",
+        "title": "Download theme from my store",
+        "category": "Shopify Beginner",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "shopifyBeginner.refresh",
+        "title": "Refresh theme files",
+        "category": "Shopify Beginner",
+        "icon": "$(refresh)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "shopifyBeginner",
+          "title": "Shopify Theme",
+          "icon": "resources/shopify.svg"
+        }
+      ]
+    },
+    "views": {
+      "shopifyBeginner": [
+        {
+          "id": "shopifyBeginner.themeExplorer",
+          "name": "Theme Files"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "shopifyBeginner.themeExplorer",
+        "contents": "No Shopify theme found in this folder.\nOpen the folder that contains the `layout`, `sections` and `templates` folders.\n[Open Folder](command:vscode.openFolder)",
+        "when": "!shopifyBeginner.isTheme"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "shopifyBeginner.whatToEdit",
+          "when": "view == shopifyBeginner.themeExplorer",
+          "group": "navigation@1"
+        },
+        {
+          "command": "shopifyBeginner.newSection",
+          "when": "view == shopifyBeginner.themeExplorer",
+          "group": "navigation@2"
+        },
+        {
+          "command": "shopifyBeginner.preview",
+          "when": "view == shopifyBeginner.themeExplorer",
+          "group": "navigation@3"
+        },
+        {
+          "command": "shopifyBeginner.refresh",
+          "when": "view == shopifyBeginner.themeExplorer",
+          "group": "navigation@4"
+        },
+        {
+          "command": "shopifyBeginner.push",
+          "when": "view == shopifyBeginner.themeExplorer",
+          "group": "1_sync@1"
+        },
+        {
+          "command": "shopifyBeginner.pull",
+          "when": "view == shopifyBeginner.themeExplorer",
+          "group": "1_sync@2"
+        }
+      ]
+    }
+  }
+}
